@@ -1,6 +1,6 @@
 ## Description
 
-Back API for the List Project from PIL.
+Backend API for the List Project from PIL.
 
 ## Installation
 

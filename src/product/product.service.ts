@@ -17,6 +17,22 @@ export class ProductService {
         return products
     }
 
+    async getProduct(): Promise<Product> {
+        
+        const product = await this.productModel.findOne().sort({createdAt: -1});
+
+        return product
+    }
+
+    async createProduct(createProductDTO: CreateProductDTO): Promise<Product> {
+        
+        const product = new this.productModel(createProductDTO);
+
+        await product.save();
+
+        return product;
+    }
+
     async updateProduct(productId: string, createProductDTO: CreateProductDTO): Promise<Product> {
         const updatedProduct = await this.productModel.findByIdAndUpdate(productId,createProductDTO, { new: true });
         return updatedProduct;

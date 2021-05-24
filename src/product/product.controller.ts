@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Res, HttpStatus, Body, NotFoundException, Query } from '@nestjs/common';
+import { Controller, Get, Put, Post, Res, HttpStatus, Body, NotFoundException, Query } from '@nestjs/common';
 
 import { CreateProductDTO } from './dto/product.dto'
 
@@ -14,6 +14,23 @@ export class ProductController {
         const products = await this.productService.getProducts();
         return res.status(HttpStatus.OK).json({
             products
+        })
+    }
+
+    @Get('/last')
+    async getProduct(@Res() res) {
+        const products = await this.productService.getProduct();
+        return res.status(HttpStatus.OK).json({
+            products
+        })
+    }
+
+    @Post('/create')
+    async createPost(@Res() res, @Body() createProductDTO: CreateProductDTO) {
+        const product = await this.productService.createProduct(createProductDTO)
+        return res.status(HttpStatus.OK).json({
+            message: 'received',
+            product: product
         })
     }
 
